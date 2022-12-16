@@ -10,45 +10,52 @@ mongoose.connect("mongodb://0.0.0.0:27017/newDB", (error) =>{
 })
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded())
 
 app.get("/greetings", (req, res) =>{
     res.status(201).send("Hello World")
 })
 
 app.get("/todos", (req, res) =>{
+    return Todo.find()
+        .then(data => {
+            res.status(200).json({
+                todo: data
+            })
+        })
+        .catch(error =>{
+            res.status(422).json({
+                error:error.toString()
+            })
+        })
 
-    res.status(200).json({
-        todo : {some : "task"}
-    })
+    
 })
 
 app.post("/todos", (req, res) =>{
 
-    // const newTodo = req.body
+    const newTodo = req.body
 
-    // return Promise.resolve()
-    //     .then(() => {
-    //         if(!newTodo.title)
-    //             throw Error("Title from Throw")
+    return Promise.resolve()
+        .then(() => {
+            if(!newTodo.title)
+                throw Error("Title from Throw Error")
             
-    //         return Todo.create(newTodo)
-    //     })
-    //     .then(data =>{
-    //         res.status(201).json({
-    //             message : "Todo Created",
-    //             todo : data
-    //         })
-    //     })
-    //     .catch(error =>{
-    //         res.status(422).json({
-    //             error: error.toString()
-    //         })
-    //     })
+            return Todo.create(newTodo)
+        })
+        .then(data =>{
+            res.status(201).json({
+                message : "Todo Created",
+                todo : data
+            })
+        })
+        .catch(error =>{
+            res.status(422).json({
+                error: error.toString()
+            })
+        })
 
-
-    res.status(201).json({
-        "message" : "Todo Created"
-    })
 })
 
 
