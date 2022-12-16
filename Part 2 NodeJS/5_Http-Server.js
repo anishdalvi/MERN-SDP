@@ -18,17 +18,25 @@ http.createServer((req, res) => {
 
     if (req.url == "/users"){
         if(req.method == 'GET'){
-            res.write("Get User Info")
 
+            res.write(JSON.stringify(DATA))
+            return res.end()
         }
         if(req.method == 'POST'){
-            res.write("User Info Created")
+            let body = ''
+            req.on('data', chunk => {
+                body += chunk.toString()   // Convert Buffer to String
+            })
+            return req.on('end', ()=> {
+                console.log(body)
+                DATA.push(qs.parse(body))
+                res.write("User Created")
+                res.end("Ok POST end")
+            })
 
         }
         return res.end()
         
         }
 
-    res.write("Hello World")
-    res.end()
 }).listen(8000)
