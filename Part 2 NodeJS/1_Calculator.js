@@ -7,6 +7,6 @@ function subtract(x,y){
 }
 
 module.exports = {
-    add : add,
-    subtract : subtract
+    add : add,      // add
+    subtract : subtract        // subtract
 }
