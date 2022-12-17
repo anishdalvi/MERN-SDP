@@ -1,11 +1,14 @@
-
 import './App.css';
+import{ useState } from 'react'
 
 
 function App() {
+  const [input, setInput] = useState("")
   return (
     <div className="App">
-        <h1>Hey</h1>
+        
+        <input value={input} onChange={(e) => setInput(e.target.value)}></input>
+        <p>User Typed {input}</p>
     </div>
   );
 }
