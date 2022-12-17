@@ -9,7 +9,7 @@ function App() {
   const [dummyValue , dummy] = useState(true)
   const [ count, setCount] = useState(0)
   
-  const memoizedCount = useMemo(() => count, [])
+  const memoizedCount = useMemo(() => count, [count])
   
   function updateCount(){
     setCount((x) => x+1)
