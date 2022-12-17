@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-
+const jsx = <h1>Hello this is New</h1>
 function App() {
   return (
     <div className="App">
@@ -19,7 +19,7 @@ function App() {
           Learn React
         </a>
       </header>
-    
+      {jsx}
     </div>
   );
 }
