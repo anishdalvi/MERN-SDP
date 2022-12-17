@@ -1,52 +1,32 @@
 import React, {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import Item from './Item'
+
+const initialItems = Array(10).fill().map((x, i) => ({
+    index: `${i}`,
+    text: `Item at index ${i}`
+}))
+const paginatedItems = Array(10).fill().map((x, i) => ({
+    index: `1${i}`,
+    text: `Item at index 1${i}`
+}))
 
 function App() {
-  
-  const [count, setCount] = useState(0)
-  const [d, setD] = useState(false)
 
-  function updateCount() {
-    setCount((x) => x+1)
+  const [ items, setItems ] = useState(initialItems)
+
+  function addNewItems() {
+    setItems((prevItems) => [...prevItems, ...paginatedItems])
   }
-
-  const updateCountArrow = () => {
-    console.log("Callback function called...")
-  }
-
-  console.log("Count: ", count)
-
-
-  return <div style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  }}>
-    <button onClick={updateCount}>Update Count</button>
-    <button onClick={() => setD((x) => !x)}>Render Callback Component</button>
-    <CouterPresentor count={count} customObject={{
-      "name": "swapnil"
-    }}/>
-    <UseCallbackExample updateCountArrow={updateCountArrow} />
-  </div>
+  return  <>
+   
+    
+    <button onClick={addNewItems}>Add New Items</button>
+    <div>
+       {items.map((item) => <Item data={item} key={item.index} />)}
+    </div>
+  </>
 }
 
-const UseCallbackExample = memo((props) => {
-  console.log("Redndered becase of reference change of arrow function...")
-  return null
-})
 
-const CouterPresentor = memo((props) => {
-  const {count} = props
-
-  useEffect(() => {
-    console.log("CounterPresentor Rendered...")
-  })
-
-  return <div>
-    {count}
-  </div>
-}, (prev, next) => {
-  return prev === next
-})
 
 export default App;
