@@ -22,9 +22,15 @@ function App() {
     console.log("Use Effect Called with one dependency (count)")
   }, [count])
 
+  // useRef works without current in dependency
+
+  // useEffect(() => {
+  //   console.log("Use Effect with ref dependency")
+  // }, [counterRef])
+
   useEffect(() => {
     console.log("Use Effect with ref dependency")
-  }, [counterRef.current])
+  }, [counterRef])
 
 
 
