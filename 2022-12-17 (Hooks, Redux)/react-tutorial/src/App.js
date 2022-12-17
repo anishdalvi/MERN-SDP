@@ -1,7 +1,9 @@
 import './App.css';
 import{ useEffect, useState, useRef } from 'react'
 
-
+const agc = {
+  
+}
 function App() {
 
   const [dummyValue , dummy] = useState(true)
@@ -22,16 +24,13 @@ function App() {
     console.log("Use Effect Called with one dependency (count)")
   }, [count])
 
-  // useRef works without current in dependency
-
-  // useEffect(() => {
-  //   console.log("Use Effect with ref dependency")
-  // }, [counterRef])
-
   useEffect(() => {
     console.log("Use Effect with ref dependency")
-  }, [counterRef])
+  }, [counterRef.current])
 
+  function test(){
+    counterRef.current = agc
+  }
 
 
   return (
@@ -42,9 +41,7 @@ function App() {
         <button onClick={() => setCount((x) => (x + 1))}>
           Update Count
         </button>
-        <button onClick={() => {
-          counterRef.current = counterRef.current + 1
-        }}>
+        <button onClick={test}>
           Update Ref Count
         </button>
         <p>Dummy State : { dummyValue}, Count State : { count } </p>
