@@ -37,7 +37,7 @@ function App() {
           Update Count
         </button>
         <button onClick={() => {
-          counterRef.current = {}
+          counterRef.current = counterRef.current + 1
         }}>
           Update Ref Count
         </button>
