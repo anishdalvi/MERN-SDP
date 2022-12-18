@@ -20,7 +20,7 @@ function App() {
   return  <>
    
     
-    <button onClick={addNewItems}>Add New Items</button>
+    <button onClick={addNewItems}>Add New Items Below</button>
     <div>
        {items.map((item, index) => <Item data={item} key={index} />)}
     </div>
