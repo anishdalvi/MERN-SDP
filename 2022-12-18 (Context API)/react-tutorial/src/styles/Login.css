@@ -1,0 +1,17 @@
+.loginContainer{
+    display: flex;
+    height: 500px;
+    flex-direction: column;
+    margin-top: 100px;
+    align-items: center;
+}
+
+.loginContainer input{
+    padding: 10px;
+    margin: 10px;
+}
+
+.loginButton:hover{
+    color: rgb(255, 255, 255);
+    background: black;
+}
