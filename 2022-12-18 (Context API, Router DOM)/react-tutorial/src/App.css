@@ -1,3 +1,30 @@
 .loginContainer, .homeContainer, .registerContainer{
   text-align: center;
 }
+
+
+.userInfo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.userItemContainer{
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.avatarStyle{
+  width: 100px;
+  height: 100px;
+}
+
+.userItemContainer h5{
+  margin-left: 10px;
+}
+
+.loader{
+  text-align: center;
+}
