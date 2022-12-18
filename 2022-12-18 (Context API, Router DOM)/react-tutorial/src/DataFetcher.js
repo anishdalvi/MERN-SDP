@@ -22,8 +22,10 @@ export default function DataFetcher() {
         })
         .then((users) =>{
             const { data } = users 
-            setUsers((prevUsers) => [...prevUsers, ...data])
-            setIsLoading(false)
+            setTimeout(() => {
+                setUsers((prevUsers) => [...prevUsers, ...data])
+                setIsLoading(false)
+            }, 3000);
         })
         .catch((error) => {
             console.log("Error: " , error)
@@ -32,7 +34,7 @@ export default function DataFetcher() {
     }
     
     if(isLoading){
-        <div className='loader'>
+        return <div className='loader'>
             <h3>Is Loading</h3>
         </div>
     }
