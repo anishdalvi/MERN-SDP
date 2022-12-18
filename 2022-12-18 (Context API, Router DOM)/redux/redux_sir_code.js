@@ -1,3 +1,17 @@
+/**
+ * 3 core concept in redux
+ * Store -> Holds state of application
+ * Action -> Describes what happened
+ * Reducer -> Ties stores and action together
+ */
+
+/**
+ * 3 principles
+ * The state of whole application is stored in an object tree within a single store
+ * The only way to change the state is to emit / dispatch an action, an object describing what happended
+ * To specify how state tree is transformed by actions, you write pure reducers (takes prev / next state as input and returns a new state)
+ */
+
 const { createStore } = require("redux");
 
 /**
@@ -6,7 +20,6 @@ const { createStore } = require("redux");
 
 const BUY_CAR = "BUY_CAR";
 const BUY_BIKE = "BUY_BIKE";
-const BUY_N_CARS = "BUY_N_CARS";
 
 function buyCar() {
   return {
@@ -27,7 +40,7 @@ function buyBike() {
 
 const initialState = {
   numberOfCars: 10,
-  numberOfCARS: 20,
+  numberOfBikes: 20,
 };
 
 function reducer(state = initialState, action) {
@@ -41,11 +54,6 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         numberOfBikes: state.numberOfBikes - 1,
-      };
-    case BUY_N_CARS:
-      return {
-        ...state,
-        numberOfCars: state.numberOfCars - 3,
       };
     default:
       return state;
@@ -66,15 +74,13 @@ console.log("Initial state", store.getState());
 const unsubscribe = store.subscribe(() =>
   console.log("Updated state", store.getState())
 );
-
 store.dispatch(buyCar());
-store.dispatch({  type: BUY_N_CARS });
-// store.dispatch(buyCar());
-// store.dispatch(buyCar());
-// store.dispatch(buyBike());
-// store.dispatch(buyBike());
-// store.dispatch(buyBike());
-// unsubscribe();
+store.dispatch(buyCar());
+store.dispatch(buyCar());
+store.dispatch(buyBike());
+store.dispatch(buyBike());
+store.dispatch(buyBike());
+unsubscribe();
 
 
 // Custom store
