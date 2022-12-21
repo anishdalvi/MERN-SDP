@@ -1,0 +1,156 @@
+//use("nosqlDemoDB")
+
+use("sample_mflix")
+
+//db.createCollection("VARTAK")
+
+
+//db.anishDB.insertOne({firstName: "1", lastName: "2"})
+
+//db.janidb.insertOne({song: "tayyabali pyaar ka dushman haaye haaye"})
+
+
+// db.anishDB.insertMany([
+//   {firstName: "john", lastName: "doe"},
+//   {firstName: "zaid", lastName: "bhai"}
+// ])
+
+
+//db.janidb.find()
+//db.janidb.findOneAndDelete()
+
+// db.anishDB.find(
+//   {firstName : "Delete"}
+// )
+
+
+// Projection (specifying what parameters are needed)
+
+// db.anishDB.find({
+//   firstName: "zaid"
+// })
+
+// db.anishDB.insertOne({
+//   firstName:"John", lastName:"Doe",
+//   hobbies:["drawing", "singing"]
+// })
+
+
+
+// db.anishDB.find({
+//   firstName:{ $ne:"zaid"}
+// },
+// {
+//   _id:0, firstName:1
+// })
+
+
+
+// REGEX expression
+
+// db.anishDB.find(
+//   { firstName: {$regex: /Anish/}}
+// )
+
+
+
+// Update Operators
+
+
+// db.anishDB.updateOne({ firstName :"Delete"}, { $set: {lastName:"You"}})
+// db.anishDB.find()
+
+
+// Update and show the updated one
+
+// db.anishDB.findOneAndUpdate(
+//   { firstName :"Delete"},
+//   { $set: {lastName:"None"}},
+//   { new:true}
+// )
+
+// insert if not found
+
+// db.anishDB.findOneAndUpdate(
+// { firstName :"Jani"},
+// { $set: {lastName:"A"}},
+// { new:true, upsert:true}
+// )
+
+// Update Many
+
+// db.anishDB.updateMany(
+// { firstName :"Jani"},
+// { $set: {lastName:"Jaaaani"}}
+// )
+
+// Removes field
+
+// db.anishDB.findOneAndUpdate(
+// { firstName :"Jani"},
+// { $unset: {lastName:"Jaaaani"}},
+// {new: true}
+// )
+
+// Rename 
+
+// db.anishDB.find()
+
+// db.anishDB.findOneAndUpdate(
+// { firstName :"Jani"},
+// { $rename: {Jaaani:"firstName"}},
+// {new: true}
+// )
+
+
+// Adding element to an array
+
+// db.anishDB.findOneAndUpdate(
+//   { firstName: "John" },
+//   { $addToSet : { hobbies : "sleeping"}},
+//   { new: true}
+// )
+
+
+
+// Aggregation Pipelines
+
+// db.movies.aggregate([
+//   { $match : {year:1983}},
+//   { $project : { genres:1, title:1}},
+//   { $limit:5}
+// ])
+
+
+// Grouping
+
+// db.movies.aggregate([
+//   { $group: { _id: "$year", movieCount: { $count: {} }} }
+// ])
+
+
+// Adding Fields
+
+// db.movies.aggregate([
+//   { $addFields: { genresCount: { $size: "$genres"}}},
+//   { $project: { title:1, genres:1, genresCount:1}}
+// ])
+
+
+// 
+
+//db.comments.find()
+//db.movies.find()
+
+
+db.comments.aggregate([
+  {
+     $lookup: {
+       from: "movies",
+       localField: "movie_id",
+       foreignField: "_id",
+       as: "movie_details"
+     }},
+     {  $limit: 5 }
+  
+])
