@@ -1,7 +1,10 @@
 import React from 'react'
 import Card from '../components/Card'
 import Form from '../components/Form'
-const Home = () => {
+const Home = ({todos}) => {
+
+  
+
   return (
     <div className='container'>
 
@@ -14,16 +17,12 @@ const Home = () => {
 
     <div className='d-flex p-5 flex-wrap justify-content-between '>
     
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
-    <Card/>
+    {
+      todos.map((t) => <Card name={t.taskName} />)
+    }
+    {console.log(todos)}
+    
+   
     
     </div>
 
