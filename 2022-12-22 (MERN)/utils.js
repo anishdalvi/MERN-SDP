@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 
 const encrypt = (text) => {
@@ -12,8 +13,14 @@ const compare = (text, hash) => {
     return bcrypt.compare(text, hash)
 }
 
+const createAcessToken = (email) => {
+    return jwt.sign({email}, "secret@123", {
+       expiresIn:5*60 
+    })
+}
 
-module.exports = {
+module.exports = {                  // destructuring
     encrypt,
-    compare
+    compare,
+    createAcessToken
 }

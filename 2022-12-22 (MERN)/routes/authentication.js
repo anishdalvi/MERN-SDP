@@ -2,6 +2,7 @@ const { Router } = require('express')
 const authRouter = Router()
 const Users = require('../models/User-model')
 const utils = require('../utils')
+//const { compare, encrypt, createAcessToken} = require('../utils')    // destructuring
 
 authRouter.post('/login', (req, res) => {
   return Promise.resolve()
@@ -10,21 +11,24 @@ authRouter.post('/login', (req, res) => {
     {
       throw Error('Email and Password not found')
     }
+    
     return Users.findOne({ email: req.body.email})
   })
   .then((data) => {
     if (!data){
       throw Error('User not found')
     }
+    
     return utils.compare(req.body.password, data.password)
   })
   .then((match) => {
     if (!match){
       throw Error('Invalid Password')
     }
-
+   
     return res.status(200).json({
-      message: 'Login Successful'
+      message: 'Login Successful',
+      access_token : utils.createAcessToken(req.body.email)  
     })
   })
   .catch( error => {
@@ -51,6 +55,8 @@ authRouter.post('/register', (req, res) => {
   .then((data) => {
     data = data.toJSON()
     delete data.password
+
+    data.access_token = utils.createAcessToken(req.body.email)    // data object already exists
 
     return res.status(200).json({
       message: "Registration Successful",
