@@ -1,5 +1,6 @@
 const { Router } = require("express")
 const verifyAuth = require("../middleware/verifyAuth")
+const Users = require('../models/User-model')
 
 const profileRouter = Router()
 
