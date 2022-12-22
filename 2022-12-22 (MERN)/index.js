@@ -1,10 +1,16 @@
 const express = require('express')
-const app = express()
 const dotenv = require('dotenv')
 const logger = require('./middleware/logger')
 const authRouter = require('./routes/authentication')
+const connectDB = require('./config/db')
 
+const app = express()
 dotenv.config()
+connectDB()
+
+app.use(express.json())     // for json objects
+app.use(express.urlencoded({ extended: true}))    // for forms
+
 app.use(logger)
 
 const PORT = process.env.PORT
