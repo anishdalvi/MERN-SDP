@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     },
     otp: {
         type:String
+    },
+    verified:{
+        type: Boolean,
+        default: false
     }
 })
 

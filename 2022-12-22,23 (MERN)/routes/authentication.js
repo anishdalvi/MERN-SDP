@@ -4,6 +4,7 @@ const Users = require('../models/User-model')
 const utils = require('../utils')
 //const { compare, encrypt, createAcessToken} = require('../utils')    // destructuring
 const verifyAuth = require("../middleware/verifyAuth")
+const { sendMail } = require('../config/mailer')
 
 authRouter.post('/login', (req, res) => {
   return Promise.resolve()
@@ -41,6 +42,7 @@ authRouter.post('/login', (req, res) => {
 })
 
 authRouter.post('/register', (req, res) => {
+  let resData
   return Promise.resolve()
   .then(() => {
     if (!(req.body.username && req.body.email && req.body.password))
@@ -54,14 +56,18 @@ authRouter.post('/register', (req, res) => {
     return Users.create(req.body)
   })
   .then((data) => {
-    data = data.toJSON()
-    delete data.password
+    resData = data.toJSON()
+    delete resData.password
 
-    data.access_token = utils.createAcessToken(req.body.email)    // data object already exists
-
+    resData.access_token = utils.createAcessToken(req.body.email)    // data object already exists
+    return sendMail(resData.email, resData.username, resData.otp)
+    
+  })
+  .then(() =>{
+    delete resData.otp
     return res.status(200).json({
       message: "Registration Successful",
-      data: data
+      data: resData
     })
   })
     .catch(error => {
@@ -82,9 +88,13 @@ authRouter.post('/verify',verifyAuth, (req, res) => {
     if (data.otp  !== req.body.otp){
       throw Error('Invalid OTP')
     }
+    //return Users.findOneAndUpdate({ email: req.email }, { $set: { verified: false }})
+    return Users.findOneAndUpdate({ email: req.email }, { verified: true })
+  })
+  .then((data) => {
     return res.status(200).json({
       message: 'Email Verified Successfully',
-      //data:data     // to show data 
+      data:data     // to show data 
     })
   })
   .catch(error => {
