@@ -19,8 +19,13 @@ const createAcessToken = (email) => {
     })
 }
 
+const generateOTP =  () => {
+    return Math.floor(Math.random() * Math.pow(10,6))
+}
+
 module.exports = {                  // destructuring
     encrypt,
     compare,
-    createAcessToken
+    createAcessToken,
+    generateOTP
 }

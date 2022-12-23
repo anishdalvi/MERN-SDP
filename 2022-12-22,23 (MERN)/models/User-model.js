@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { generateOTP } = require('../utils')
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -14,7 +15,15 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required:true,
+    },
+    otp: {
+        type:String
     }
+})
+
+
+userSchema.pre("save", function(){
+    this.otp = generateOTP()
 })
 
 const userModel = mongoose.model('User' , userSchema )
