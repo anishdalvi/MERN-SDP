@@ -3,6 +3,7 @@ const authRouter = Router()
 const Users = require('../models/User-model')
 const utils = require('../utils')
 //const { compare, encrypt, createAcessToken} = require('../utils')    // destructuring
+const verifyAuth = require("../middleware/verifyAuth")
 
 authRouter.post('/login', (req, res) => {
   return Promise.resolve()
@@ -74,9 +75,23 @@ authRouter.post('/register', (req, res) => {
 
 
 
-authRouter.post('/verify_email', (req, res) => {
-  return res.status(200).json({
-    message: 'Email Verified Successfully'
+authRouter.post('/verify',verifyAuth, (req, res) => {
+  //return Users.findOne({ email: req.email }, { otp:0})    // will only send otp field
+  return Users.findOne({ email: req.email }, { otp:1})
+  .then(data => {
+    if (data.otp  !== req.body.otp){
+      throw Error('Invalid OTP')
+    }
+    return res.status(200).json({
+      message: 'Email Verified Successfully',
+      //data:data     // to show data 
+    })
+  })
+  .catch(error => {
+    return res.status(422).json({
+      message: "Email Verification Failed",
+      error: error.message
+    })
   })
 })
 

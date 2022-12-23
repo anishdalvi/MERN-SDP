@@ -15,7 +15,7 @@ const compare = (text, hash) => {
 
 const createAcessToken = (email) => {
     return jwt.sign({email}, "secret@123", {
-       expiresIn:5*60 
+       expiresIn:60*60 
     })
 }
 
