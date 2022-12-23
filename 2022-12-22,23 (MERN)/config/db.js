@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 module.exports = () => {
     mongoose.set('strictQuery', true)   // suppressed warning
-    mongoose.connect("mongodb://0.0.0.0:27017/mern_sdp", (error) => {
+    mongoose.connect("mongodb://0.0.0.0:27017/mernSDP_Test", (error) => {
         if(error){
             console.log("Mongo Error: ", error);
             throw error

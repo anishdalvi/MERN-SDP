@@ -7,7 +7,10 @@ const connectDB = require('./config/db')
 
 
 const app = express()
-dotenv.config()
+dotenv.config({
+  //path: process.env.NODE_ENV == "test" ? '.env.test' : '.env'
+  path:'.env.test'
+})
 connectDB()
 
 app.use(express.json())     // for json objects

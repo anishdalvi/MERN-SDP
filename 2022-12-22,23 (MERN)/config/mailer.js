@@ -20,12 +20,13 @@ const sendMail = (email, username, otp) => {
             html:       // template literals ``
             `   
             <div>
-            <h1>Hii ${username}</h1>       
-            <h2>Hello from Email Service of Nodemailer</h2>
+            <h1>Aye shaani ${username}</h1>       
+            <h1>Zhopaaa Kaaad</h1>
+            <h2>Email Service of Nodemailer.....Ting Tong</h2>
             <br />
             <p>Your OTP for email verification is <strong> ${otp} </strong>
             <br />
-            <h4>Thank You</h4>
+            <h4>E Cell saathi nahi aalis ka?</h4>
             </div>
             `
 
