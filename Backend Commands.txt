@@ -1,0 +1,32 @@
+---------------------------> Node Mailer <---------------------------
+
+npm install nodemailer
+
+---------------------------> JWT <---------------------------
+
+npm install jsonwebtoken 
+
+---------------------------> BCRYPT <---------------------------
+
+npm install bcrypt
+
+
+---------------------------> ESLINT <---------------------------
+
+// Add this in package.json and then npm install
+
+"eslint": "^8.30.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^5.0.0",
+
+
+//In terminal 
+
+npm -g i eslint-cli
+npm i eslint --save-dev
+eslint .\
+
+
